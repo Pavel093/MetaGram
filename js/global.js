@@ -3,15 +3,15 @@ const themes = {
   light: {
     name: 'light',
     media: {
-      logo: '/assets/themes/light/logo.png',
-      promo: '/assets/video/white_coin.mp4'
+      logo: 'assets/themes/light/logo.png',
+      promo: 'assets/video/white_coin.mp4'
     }
   },
   dark: {
     name: 'dark',
     media: {
-      logo: '/assets/themes/dark/logo.png',
-      promo: '/assets/video/dark_coin.mp4'
+      logo: 'assets/themes/dark/logo.png',
+      promo: 'assets/video/dark_coin.mp4'
     }
   }
 };
