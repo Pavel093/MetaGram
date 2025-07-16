@@ -1,4 +1,3 @@
-// Конфигурация тем
 const themes = {
   light: {
     name: 'light',

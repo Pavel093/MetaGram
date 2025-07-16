@@ -1,6 +1,24 @@
 :root {
-  /* Общие переменные */
-  --font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@200;300;400;600;&display=swap');
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background 0.3s ease;
+  margin: 0;
+  padding: 0;
+  font-family: 'Public Sans', sans-serif;
+}
+
+*{
+  font-weight: 200;
+  margin: 0;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
 }
 
 [data-theme="light"] {
@@ -15,19 +33,29 @@
   --theme-name: 'dark';
 }
 
-body {
-  font-family: var(--font-family);
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  transition: background 0.3s ease;
+.base-material{
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 35px;
 }
 
-.theme-loader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: #f0f0f0;
-  padding: 10px;
-  text-align: center;
+[data-theme="dark"] .base-material{
+  background: linear-gradient(to bottom, #0000009f, #312e4d57);
+  border: 1.5px solid #423E66;
+}
+
+[data-theme="light"] .base-material{
+  background: linear-gradient(to bottom, #ffffff54, #c3bce057);
+  border: 1.5px solid #CFCEEA;
+}
+
+.base-btn{
+  position: relative;
+  border-radius: 50px;
+  background-color: #FFD700;
+  color: #000000;
+  text-decoration: none;
+  padding: 12.5px 22.5px;
+  font-weight: 400;
+  font-size: 22px;
 }

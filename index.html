@@ -6,15 +6,24 @@
     <title>MetaGram</title>
     <link rel="icon" href="assets/image.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/one-section.css">
 </head>
 <body>
-    <header>
-        <button onclick="setTheme('light')">Светлая</button>
+    <header style="position: fixed; left: 0; top: 0; z-index: 1;">
+        <button class="a" onclick="setTheme('light')">Светлая</button>
         <button onclick="setTheme('dark')">Темная</button>
     </header>
     <main>
-        <!-- <img data-theme-media="logo" alt="Логотип">   -->
-        <video style="width: 500px; height: 250px;" data-theme-media="promo" autoplay loop muted></video>
+         <section class="one-section">
+            <h1><span>MetaGram</span> – Your Key to the Metaverse</h1>
+            <div class="card-container-first-page">
+                <div class="card base-material">
+                    <p>Invest in the Future with MetaGram Token!</p>
+                    <a class="base-btn" href="/">Get airdrop</a>
+                </div>
+            </div>
+            <video data-theme-media="promo" autoplay loop muted></video>
+         </section>
     </main>
     <script src="js/global.js" defer></script>
 </body>
