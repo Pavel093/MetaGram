@@ -78,3 +78,5 @@ document.addEventListener('DOMContentLoaded', () => {
   // Скрываем лоадер
   document.querySelector('.theme-loader').style.display = 'none';
 });
+
+

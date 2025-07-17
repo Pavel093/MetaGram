@@ -3,7 +3,7 @@
   padding: 0;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@200;300;400;600;&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;600;&display=swap');
 
 body {
   background-color: var(--bg-color);
@@ -15,20 +15,20 @@ body {
 }
 
 *{
-  font-weight: 200;
+  font-weight: 300;
   margin: 0;
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
 }
 
 [data-theme="light"] {
-  --bg-color: #ffffff;
+  --bg-color: #F9F9FF;
   --text-color: #000000;
   --theme-name: 'light';
 }
 
 [data-theme="dark"] {
-  --bg-color: #222222;
+  --bg-color: black;
   --text-color: #ffffff;
   --theme-name: 'dark';
 }
@@ -58,4 +58,11 @@ body {
   padding: 12.5px 22.5px;
   font-weight: 400;
   font-size: 22px;
+  height: max-content;
+  width: max-content;
+}
+
+[data-theme="light"] .base-btn{
+    background-color: #D4095A;
+    color: white;
 }

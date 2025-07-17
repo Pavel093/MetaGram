@@ -19,15 +19,53 @@
     min-height: 100%;
     width: auto;
     height: auto;
-    z-index: -1;
+    z-index: -2; 
     object-fit: cover;
 }
 
+/* Градиентные наложения для видео */
+.one-section::before,
+.one-section::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 100px;
+    z-index: -1; 
+    pointer-events: none;
+}
+
+.one-section::before {
+    top: 0;
+    background: linear-gradient(to bottom, black 0%, transparent 100%);
+}
+
+.one-section::after {
+    bottom: 0;
+    background: linear-gradient(to top, black 0%, transparent 100%);
+}
+
+[data-theme="light"] .one-section::before,
+[data-theme="light"] .one-section::after {
+    background: linear-gradient(to bottom, #F9F9FF 0%, transparent 100%);
+}
+
+[data-theme="light"] .one-section::after {
+    background: linear-gradient(to top, #F9F9FF 0%, transparent 100%);
+}
+
+@media (min-width: 768px) {
+    .one-section::before, .one-section::after{
+        background: none;
+    }
+}
+
 .one-section h1 {
-    font-size: 64px;
+    font-size: 69px;
     width: 35%;
     font-weight: 500;
     color: black;
+    margin-top: 75px;
 }
 
 .one-section h1 span {
@@ -44,21 +82,342 @@
 
 .card-container-first-page {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap; 
     position: relative;
+    width: 100%; 
+    gap: 35px; 
 }
 
-.card-container-first-page .card {
-    width: 35%;
+.card-container-first-page .card-one {
+    width: calc(35% - 17.5px);
     padding: 35px;
     display: flex;
     flex-wrap: wrap;
 }
 
-.card-container-first-page .card p {
+.card-container-first-page .card-one p {
     font-size: 35px;
     line-height: 140%;
     letter-spacing: 1.2px;
     width: 100%;
     margin-bottom: 35px;
+}
+
+.card-container-first-page .card-two {
+    width: calc(65% - 17.5px); 
+    padding: 35px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Стили для .head с вертикальной линией */
+.card-container-first-page .card-two .head {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 35px;
+    position: relative;
+}
+
+.card-container-first-page .card-two .head::after {
+    content: '';
+    position: absolute;
+    left: 60%;
+    top: 0;
+    bottom: 0;
+    width: 1.5px;
+    background-color: #ffffff56;
+    border-radius: 1.5px;
+    transform: translateX(-50%);
+}
+
+[data-theme="light"] .card-container-first-page .card-two .head::after {
+    background-color: #7C7C7C;
+}
+
+.card-container-first-page .card-two .left {
+    width: 60%;
+    position: relative;
+    z-index: 1;
+}
+
+.card-container-first-page .card-two .right {
+    width: 40%;
+    text-align: left;
+    position: relative;
+    z-index: 1;
+}
+
+/* Стили для .right с горизонтальной линией */
+.card-container-first-page .card-two .right {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-container-first-page .card-two .right .one {
+    font-size: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+.card-container-first-page .card-two .right .two {
+    font-size: 33px;
+    margin-top: 20px;
+    position: relative;
+    z-index: 1;
+    font-weight: 600;
+}
+
+.card-container-first-page .card-two .right::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 2.5px;
+    background-color: #ffffff56;
+    border-radius: 1.5px;
+    transform: translateY(-50%);
+}
+
+[data-theme="light"] .card-container-first-page .card-two .right::after  {
+    background-color: #7C7C7C;
+}
+
+.card-container-first-page .card-two .right .one span {
+    color: #FFD700;
+}
+
+[data-theme="light"] .card-container-first-page .card-two .right .one span {
+    color: #D4095A;
+}
+
+.card-container-first-page .card-two .right .two span {
+    color: #FFD700;
+}
+
+[data-theme="light"] .card-two .right .two span {
+    color: #D4095A;
+}
+
+.card-container-first-page .card-two .bottom {
+    align-self: flex-start;
+    margin-top: auto;
+}
+
+.card-container-first-page .card-two p {
+    font-size: 35px;
+    line-height: 130%;
+    letter-spacing: 1.2px;
+    margin-bottom: 0;
+}
+
+.card-container-first-page .card-two .bottom p{
+    display: flex;
+    align-items: center;
+    color: #FFD700;
+    font-weight: 600;
+    gap: 10px;
+    font-size: 40px;
+}
+
+[data-theme="light"] .card-container-first-page .card-two .bottom p {
+    color: black;
+}
+
+.card-container-first-page .card-two .bottom p img{
+    width: 55px;
+    height: 55px;
+}
+
+@media (max-width: 768px) {
+    .one-section {
+        padding: 20px;
+        min-height: 100dvh;
+        height: auto;
+    }
+
+    .one-section h1 {
+        font-size: 42px;
+        width: 90%;
+        margin-top: 40px;
+    }
+
+    .one-section video {
+        height: 66.66vh; 
+        width: auto;
+        min-height: 0;
+        min-width: 0;
+        top: 15%;
+        left: 50%;
+        transform: translate(-50%, 0);
+        object-fit: cover;
+    }
+
+    .one-section::before,
+    .one-section::after {
+        height: 66.66vh;
+        top: 15%;
+        background: linear-gradient(to bottom, black 0%, transparent 20%);
+    }
+
+    .one-section::after {
+        background: linear-gradient(to top, black 0%, transparent 20%);
+    }
+
+    [data-theme="light"] .one-section::before {
+        background: linear-gradient(to bottom, #F9F9FF 0%, transparent 20%);
+    }
+
+    [data-theme="light"] .one-section::after {
+        background: linear-gradient(to top, #F9F9FF 0%, transparent 20%);
+    }
+
+    .card-container-first-page {
+        flex-direction: column-reverse; /* Изменено на column-reverse для смены порядка */
+        gap: 20px;
+    }
+
+    .card-container-first-page .card-one,
+    .card-container-first-page .card-two {
+        width: calc(100% - 40px) !important;
+        padding: 20px !important; 
+    }
+
+    .card-container-first-page .card-one p,
+    .card-container-first-page .card-two .right .one,
+    .card-container-first-page .card-two .right .two {
+        font-size: 18px !important;
+        line-height: 135%;
+        letter-spacing: 0.8px;
+    }
+
+    .card-container-first-page .card-two .bottom p {
+        font-size: 20px;
+        gap: 5px;
+        margin-top: 25px;
+    }
+
+    .card-container-first-page .card-two .right .two {
+        font-size: 20px !important;
+        font-weight: 600;
+    }
+
+    .card-container-first-page .card-two .head {
+        gap: 10px;
+    }
+
+    .card-container-first-page .card-two .head .right {
+        width: 45%;
+    }
+
+    .card-container-first-page .card-two .head .left p {
+        font-size: 16px;
+        width: 90%;
+    }
+
+    .card-container-first-page .card-two .head .left {
+        width: 50%;
+    }
+
+    .card-container-first-page .card-two .head::after {
+        left: 50%;
+    }
+
+    .card-container-first-page .card-two .bottom p img {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .card-container-first-page .card-one a.base-btn {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+
+    .card-container-first-page .card-two .right .one {
+        font-size: clamp(12px, 3.5vw, 16px) !important; 
+    }
+
+    .card-container-first-page .card-two .right .two {
+        font-size: clamp(14px, 4vw, 18px) !important; 
+        margin-top: clamp(8px, 2vw, 12px) !important; 
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1328px) {
+    .one-section {
+        padding: 25px;
+        height: 100dvh;
+    }
+
+    .one-section h1 {
+        font-size: 48px;
+        width: 30%;
+        margin-top: 50px;
+    }
+
+    .card-container-first-page {
+        gap: 25px;
+    }
+
+    .card-container-first-page .card-one,
+    .card-container-first-page .card-two {
+        padding: 25px !important;
+    }
+
+    .card-container-first-page .card-one {
+        width: calc(40% - 12.5px) !important;
+    }
+
+    .card-container-first-page .card-two {
+        width: calc(60% - 12.5px) !important;
+    }
+
+    .card-container-first-page .card-one p,
+    .card-container-first-page .card-two p {
+        font-size: 32px !important;
+        line-height: 135%;
+        letter-spacing: 1px;
+    }
+
+    .card-container-first-page .card-two .right .one {
+        font-size: 22px !important;
+    }
+
+    .card-container-first-page .card-two .right .two {
+        font-size: 24px !important;
+        margin-top: 15px;
+    }
+
+    .card-container-first-page .card-two .bottom p {
+        font-size: 28px;
+        gap: 8px;
+    }
+
+    .card-container-first-page .card-two .bottom p img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .card-container-first-page .card-two .head::after {
+        left: 55%;
+    }
+
+    .card-container-first-page .card-two .head .left {
+        width: 55%;
+    }
+
+    .card-container-first-page .card-two .head .right {
+        width: 45%;
+    }
+
+    /* Уменьшаем градиенты для средних экранов */
+    .one-section::before,
+    .one-section::after {
+        height: 70px;
+    }
 }
