@@ -2,15 +2,15 @@ const themes = {
   light: {
     name: 'light',
     media: {
-      logo: 'assets/themes/light/logo.png',
-      promo: 'assets/video/white_coin.mp4'
+      promo: 'assets/video/white_coin.mp4',
+      two_mask: 'assets/two-section/Mask-light.png'
     }
   },
   dark: {
     name: 'dark',
     media: {
-      logo: 'assets/themes/dark/logo.png',
-      promo: 'assets/video/dark_coin.mp4'
+      promo: 'assets/video/dark_coin.mp4',
+      two_mask: 'assets/two-section/Mask-dark.png'
     }
   }
 };
@@ -33,7 +33,7 @@ function initTheme() {
   return themeName;
 }
 
-// 3. Загружаем медиафайлы для темы
+// 3. Загружаем медиафайлы для темы с улучшенной обработкой видео
 function loadThemeMedia(themeName) {
   const theme = themes[themeName];
   if (!theme) return;
@@ -47,12 +47,61 @@ function loadThemeMedia(themeName) {
     if (!mediaUrl) return;
 
     if (el.tagName === 'IMG') {
+      // Обработка изображений
       el.src = mediaUrl;
     } else if (el.tagName === 'VIDEO') {
-      el.innerHTML = `<source src="${mediaUrl}" type="video/mp4">`;
-      el.load();
+      // Обработка видео с улучшенной логикой
+      handleVideoElement(el, mediaUrl);
     }
   });
+}
+
+// Новая функция для обработки видео элементов
+function handleVideoElement(videoEl, videoUrl) {
+  // Проверяем, не загружено ли уже это видео
+  const currentSource = videoEl.querySelector('source');
+  if (currentSource && currentSource.src === videoUrl) {
+    // Видео уже загружено, пытаемся воспроизвести
+    playVideoWithFallback(videoEl);
+    return;
+  }
+
+  // Создаем новый источник видео
+  videoEl.innerHTML = '';
+  const source = document.createElement('source');
+  source.src = videoUrl;
+  source.type = 'video/mp4';
+  videoEl.appendChild(source);
+
+  // Добавляем класс для плавного появления
+  videoEl.classList.remove('ready');
+
+  // Обработчики событий для видео
+  videoEl.onloadeddata = () => {
+    videoEl.classList.add('ready');
+    playVideoWithFallback(videoEl);
+  };
+
+  videoEl.onerror = () => {
+    console.error('Error loading video:', videoUrl);
+  };
+
+  // Принудительная загрузка видео
+  videoEl.load();
+}
+
+// Функция для воспроизведения видео с обработкой ошибок
+function playVideoWithFallback(videoEl) {
+  if (videoEl.readyState < 3) return; // Недостаточно данных для воспроизведения
+
+  const playPromise = videoEl.play();
+  
+  if (playPromise !== undefined) {
+    playPromise.catch(error => {
+      console.log('Autoplay prevented:', error);
+      // Можно добавить кнопку воспроизведения здесь при необходимости
+    });
+  }
 }
 
 // 4. Публичная функция для смены темы
@@ -76,7 +125,17 @@ document.addEventListener('DOMContentLoaded', () => {
   loadThemeMedia(themeName);
   
   // Скрываем лоадер
-  document.querySelector('.theme-loader').style.display = 'none';
+  const themeLoader = document.querySelector('.theme-loader');
+  if (themeLoader) {
+    themeLoader.style.display = 'none';
+  }
 });
 
-
+// Добавляем обработчик для изменения системной темы
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+  if (!localStorage.getItem('selectedTheme')) {
+    const themeName = e.matches ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', themeName);
+    loadThemeMedia(themeName);
+  }
+});
