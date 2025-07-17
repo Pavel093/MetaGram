@@ -252,7 +252,7 @@
         width: auto;
         min-height: 0;
         min-width: 0;
-        top: 10%;
+        top: 5%;
         left: 50%;
         transform: translate(-50%, 0);
         object-fit: cover;
@@ -261,7 +261,7 @@
     .one-section::before,
     .one-section::after {
         height: 66.66vh;
-        top: 10%;
+        top: 5%;
         background: linear-gradient(to bottom, black 0%, transparent 20%);
     }
 
