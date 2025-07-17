@@ -2,48 +2,62 @@ const themes = {
   light: {
     name: 'light',
     media: {
-      promo: 'assets/video/white_coin.mp4',
+      promo: {
+        desktop: 'assets/video/white_coin.mp4',
+        mobile: 'assets/video/white_coin_720.mp4'
+      },
       two_mask: 'assets/two-section/Mask-light.png'
     }
   },
   dark: {
     name: 'dark',
     media: {
-      promo: 'assets/video/dark_coin.mp4',
+      promo: {
+        desktop: 'assets/video/dark_coin.mp4',
+        mobile: 'assets/video/dark_coin_720.mp4'
+      },
       two_mask: 'assets/two-section/Mask-dark.png'
     }
   }
 };
 
-// 1. Определяем текущую тему (системную или из localStorage)
+// Определение мобильного устройства
+function isMobileDevice() {
+  return window.matchMedia('(max-width: 768px)').matches;
+}
+
+// Определение темы
 function detectSystemTheme() {
-  return window.matchMedia('(prefers-color-scheme: dark)').matches 
-    ? 'dark' 
-    : 'light';
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
 function getSavedTheme() {
   return localStorage.getItem('selectedTheme');
 }
 
-// 2. Устанавливаем тему (без загрузки медиа)
 function initTheme() {
   const themeName = getSavedTheme() || detectSystemTheme();
   document.documentElement.setAttribute('data-theme', themeName);
   return themeName;
 }
 
-// 3. Загружаем медиафайлы для темы
+// Загрузка медиа с поддержкой мобильных версий
 function loadThemeMedia(themeName) {
   const theme = themes[themeName];
   if (!theme) return;
 
   const mediaElements = document.querySelectorAll('[data-theme-media]');
-  
+  const isMobile = isMobileDevice();
+
   mediaElements.forEach(el => {
     const mediaKey = el.getAttribute('data-theme-media');
-    const mediaUrl = theme.media[mediaKey];
-    
+    let mediaUrl = theme.media[mediaKey];
+
+    // Если это видео — выбираем мобильную или десктоп версию
+    if (mediaUrl && typeof mediaUrl === 'object') {
+      mediaUrl = isMobile ? mediaUrl.mobile : mediaUrl.desktop;
+    }
+
     if (!mediaUrl) return;
 
     if (el.tagName === 'IMG') {
@@ -52,8 +66,8 @@ function loadThemeMedia(themeName) {
       el.innerHTML = `<source src="${mediaUrl}" type="video/mp4">`;
       el.load();
 
-      // Ждём, пока видео будет готово к проигрыванию
-      el.oncanplay = () => {
+      // Ждём полной буферизации перед воспроизведением
+      el.oncanplaythrough = () => {
         el.play().catch(err => {
           console.warn('Autoplay failed:', err);
         });
@@ -62,26 +76,19 @@ function loadThemeMedia(themeName) {
   });
 }
 
-// 4. Публичная функция для смены темы
+// Смена темы
 function setTheme(themeName) {
   if (!themes[themeName]) return;
-  
-  // Меняем тему и сохраняем
+
   document.documentElement.setAttribute('data-theme', themeName);
   localStorage.setItem('selectedTheme', themeName);
-  
-  // Перезагружаем медиа
+
   loadThemeMedia(themeName);
 }
 
-// 5. Инициализация при загрузке страницы
+// Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
-  // Сначала ставим тему
   const themeName = initTheme();
-  
-  // Затем загружаем медиа
   loadThemeMedia(themeName);
-  
-  // Скрываем лоадер
-  document.querySelector('.theme-loader').style.display = 'none';
+  document.querySelector('.theme-loader')?.remove();
 });
