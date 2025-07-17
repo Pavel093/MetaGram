@@ -66,3 +66,11 @@ body {
     background-color: #D4095A;
     color: white;
 }
+
+[data-theme="light"] .base-color-multi{
+  color: #D4095A;
+}
+
+[data-theme="dark"] .base-color-multi{
+  color: #FFD700;
+}

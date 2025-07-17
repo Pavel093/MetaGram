@@ -10,6 +10,7 @@
     justify-content: space-between;
 }
 
+
 .one-section video {
     position: absolute;
     top: 50%;
@@ -61,7 +62,7 @@
 }
 
 @media (min-width: 768px) {
-    .one-section::before, .one-section::after{
+    .one-section::before{
         background: none;
     }
 }
@@ -74,16 +75,9 @@
     margin-top: 75px;
 }
 
-.one-section h1 span {
-    color: #D4095A;
-}
 
 [data-theme="dark"] .one-section h1 {
     color: white;
-}
-
-[data-theme="dark"] .one-section h1 span {
-    color: #FFD700;
 }
 
 .card-container-first-page {

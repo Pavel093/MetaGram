@@ -15,25 +15,23 @@ const themes = {
   }
 };
 
-// 1. Определяем текущую тему (системную или из localStorage)
+// 1. Определение текущей темы
 function detectSystemTheme() {
-  return window.matchMedia('(prefers-color-scheme: dark)').matches 
-    ? 'dark' 
-    : 'light';
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
 function getSavedTheme() {
   return localStorage.getItem('selectedTheme');
 }
 
-// 2. Устанавливаем тему (без загрузки медиа)
+// 2. Установка темы
 function initTheme() {
   const themeName = getSavedTheme() || detectSystemTheme();
   document.documentElement.setAttribute('data-theme', themeName);
   return themeName;
 }
 
-// 3. Загружаем медиафайлы для темы с улучшенной обработкой видео
+// 3. Улучшенная загрузка медиа
 function loadThemeMedia(themeName) {
   const theme = themes[themeName];
   if (!theme) return;
@@ -47,91 +45,117 @@ function loadThemeMedia(themeName) {
     if (!mediaUrl) return;
 
     if (el.tagName === 'IMG') {
-      // Обработка изображений
       el.src = mediaUrl;
     } else if (el.tagName === 'VIDEO') {
-      // Обработка видео с улучшенной логикой
-      handleVideoElement(el, mediaUrl);
+      optimizeVideoLoading(el, mediaUrl);
     }
   });
 }
 
-// Новая функция для обработки видео элементов
-function handleVideoElement(videoEl, videoUrl) {
+// 4. Оптимизированная загрузка видео
+function optimizeVideoLoading(videoEl, videoUrl) {
   // Проверяем, не загружено ли уже это видео
   const currentSource = videoEl.querySelector('source');
   if (currentSource && currentSource.src === videoUrl) {
-    // Видео уже загружено, пытаемся воспроизвести
-    playVideoWithFallback(videoEl);
+    videoEl.classList.add('ready');
     return;
   }
 
-  // Создаем новый источник видео
-  videoEl.innerHTML = '';
+  // Создаем новый элемент видео для предзагрузки
+  const tempVideo = document.createElement('video');
+  tempVideo.style.display = 'none';
+  tempVideo.preload = 'auto';
+  tempVideo.muted = true;
+  
   const source = document.createElement('source');
   source.src = videoUrl;
   source.type = 'video/mp4';
-  videoEl.appendChild(source);
+  tempVideo.appendChild(source);
 
-  // Добавляем класс для плавного появления
-  videoEl.classList.remove('ready');
+  // Добавляем временное видео в DOM для предзагрузки
+  document.body.appendChild(tempVideo);
 
-  // Обработчики событий для видео
-  videoEl.onloadeddata = () => {
-    videoEl.classList.add('ready');
-    playVideoWithFallback(videoEl);
+  tempVideo.onloadeddata = () => {
+    // Когда видео загружено, подменяем источник в основном видео
+    videoEl.innerHTML = '';
+    const mainSource = source.cloneNode();
+    videoEl.appendChild(mainSource);
+    
+    // Удаляем временное видео
+    document.body.removeChild(tempVideo);
+    
+    // Применяем оптимизации
+    applyVideoOptimizations(videoEl);
+    
+    // Пытаемся воспроизвести
+    playVideoWithRetry(videoEl, 3);
   };
 
-  videoEl.onerror = () => {
-    console.error('Error loading video:', videoUrl);
+  tempVideo.onerror = () => {
+    console.error('Error preloading video:', videoUrl);
+    document.body.removeChild(tempVideo);
   };
-
-  // Принудительная загрузка видео
-  videoEl.load();
 }
 
-// Функция для воспроизведения видео с обработкой ошибок
-function playVideoWithFallback(videoEl) {
-  if (videoEl.readyState < 3) return; // Недостаточно данных для воспроизведения
+// 5. Применение оптимизаций к видео
+function applyVideoOptimizations(videoEl) {
+  // Устанавливаем важные атрибуты
+  videoEl.preload = 'auto';
+  videoEl.playsInline = true;
+  videoEl.muted = true;
+  videoEl.loop = true;
+  
+  // Принудительное декодирование видео
+  if ('videoTracks' in videoEl) {
+    videoEl.videoTracks[0].selected = true;
+  }
+  
+  // WebKit-specific optimization
+  if ('webkitSupportsFullscreen' in videoEl) {
+    videoEl.webkitEnterFullscreen();
+    videoEl.webkitExitFullscreen();
+  }
+}
+
+// 6. Попытка воспроизведения с повторными попытками
+function playVideoWithRetry(videoEl, retries) {
+  if (retries <= 0) return;
 
   const playPromise = videoEl.play();
   
   if (playPromise !== undefined) {
     playPromise.catch(error => {
-      console.log('Autoplay prevented:', error);
-      // Можно добавить кнопку воспроизведения здесь при необходимости
+      console.log('Play attempt failed, retrying...', error);
+      setTimeout(() => {
+        playVideoWithRetry(videoEl, retries - 1);
+      }, 500);
+    }).then(() => {
+      videoEl.classList.add('ready');
     });
   }
 }
 
-// 4. Публичная функция для смены темы
+// 7. Функция смены темы
 function setTheme(themeName) {
   if (!themes[themeName]) return;
   
-  // Меняем тему и сохраняем
   document.documentElement.setAttribute('data-theme', themeName);
   localStorage.setItem('selectedTheme', themeName);
-  
-  // Перезагружаем медиа
   loadThemeMedia(themeName);
 }
 
-// 5. Инициализация при загрузке страницы
+// 8. Инициализация
 document.addEventListener('DOMContentLoaded', () => {
-  // Сначала ставим тему
   const themeName = initTheme();
-  
-  // Затем загружаем медиа
   loadThemeMedia(themeName);
   
-  // Скрываем лоадер
   const themeLoader = document.querySelector('.theme-loader');
   if (themeLoader) {
     themeLoader.style.display = 'none';
   }
 });
 
-// Добавляем обработчик для изменения системной темы
+// 9. Обработчик изменения системной темы
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
   if (!localStorage.getItem('selectedTheme')) {
     const themeName = e.matches ? 'dark' : 'light';
