@@ -36,7 +36,14 @@ body {
 .base-material{
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-radius: 35px;
+  border-radius: 45px;
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 768px) {
+  .base-material{
+    border-radius: 35px;
+  }
 }
 
 [data-theme="dark"] .base-material{

@@ -6,7 +6,8 @@ const themes = {
         desktop: 'assets/video/white_coin.mp4',
         mobile: 'assets/video/white_coin_720.mp4'
       },
-      two_mask: 'assets/two-section/Mask-light.png'
+      two_mask: 'assets/two-section/Mask-light.png',
+      shape: 'assets/two-section/shape2_light.png'
     }
   },
   dark: {
@@ -16,7 +17,8 @@ const themes = {
         desktop: 'assets/video/dark_coin.mp4',
         mobile: 'assets/video/dark_coin_720.mp4'
       },
-      two_mask: 'assets/two-section/Mask-dark.png'
+      two_mask: 'assets/two-section/Mask-dark.png',
+      shape: 'assets/two-section/shape2_dark.png'
     }
   }
 };
