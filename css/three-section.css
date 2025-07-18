@@ -1,0 +1,85 @@
+.three-section{
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 35px;
+    box-sizing: border-box;
+    display: flex;
+}
+
+.three-section .svg{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    z-index: -1;
+}
+
+.three-section .left-card{
+    position: relative;
+    z-index: 1;
+}
+
+.three-section .left-card .mini-card{
+    width: max-content;
+    padding: 40px;
+    margin: 10px;
+}
+
+.three-section h2{
+    font-size: 65px;
+    margin-bottom: 35px;
+}
+
+.left-card .mini-card p{
+    font-size: 25px;
+    color: #E5E5E5;
+}
+
+[data-theme="light"] .left-card .mini-card p{
+    color: black;
+}
+
+.three-section .left-card{
+    width: calc(60%);
+}
+
+.three-section .right-card{
+    width: 40%;
+}
+
+.three-section .right-card .element{
+    display: flex;
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 80px;
+}
+
+.three-section .right-card .element p{
+    color: white;
+    margin: 0;
+}
+
+[data-theme="light"] .three-section .right-card .element p{
+    color: black;
+}
+
+.three-section .right-card .element .date{
+    font-size: 27px;
+    font-weight: 500;
+    padding-right: 30px;
+    padding-bottom: 0;
+}
+
+.three-section .right-card .element .info{
+    font-size: 25px;
+    padding-left: 30px;
+    padding-bottom: 0;
+}
+
+.three-section .right-card .element img{
+    width: 35px;
+    height: 35px;
+}

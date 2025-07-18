@@ -1,0 +1,67 @@
+<svg width="1400" height="826" viewBox="0 0 1400 826" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g opacity="0.7" filter="url(#filter0_n_279_765)">
+<rect width="1400" height="826" fill="url(#paint0_radial_279_765)" fill-opacity="0.7"/>
+<rect width="1400" height="826" fill="url(#paint1_radial_279_765)" fill-opacity="0.6"/>
+<rect width="1400" height="826" fill="url(#paint2_radial_279_765)" fill-opacity="0.6"/>
+<rect width="1400" height="826" fill="url(#paint3_radial_279_765)" fill-opacity="0.6"/>
+<rect width="1400" height="826" fill="url(#paint4_radial_279_765)" fill-opacity="0.7"/>
+<rect width="1400" height="826" fill="url(#paint5_radial_279_765)" fill-opacity="0.7"/>
+<rect width="1400" height="826" fill="url(#paint6_radial_279_765)" fill-opacity="0.6"/>
+</g>
+<defs>
+<filter id="filter0_n_279_765" x="0" y="0" width="1400" height="826" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feTurbulence type="fractalNoise" baseFrequency="0.71428573131561279 0.71428573131561279" stitchTiles="stitch" numOctaves="3" result="noise" seed="1085" />
+<feComponentTransfer in="noise" result="coloredNoise1">
+<feFuncR type="linear" slope="2" intercept="-0.5" />
+<feFuncG type="linear" slope="2" intercept="-0.5" />
+<feFuncB type="linear" slope="2" intercept="-0.5" />
+<feFuncA type="discrete" tableValues="0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "/>
+</feComponentTransfer>
+<feComposite operator="in" in2="shape" in="coloredNoise1" result="noise1Clipped" />
+<feComponentTransfer in="noise1Clipped" result="color1">
+<feFuncA type="table" tableValues="0 0.03" />
+</feComponentTransfer>
+<feMerge result="effect1_noise_279_765">
+<feMergeNode in="shape" />
+<feMergeNode in="color1" />
+</feMerge>
+</filter>
+<radialGradient id="paint0_radial_279_765" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(351.5 363.169) rotate(13.077) scale(328.52 252.025)">
+<stop stop-color="#E6005C" stop-opacity="0.35"/>
+<stop offset="0.266773" stop-color="#E6005C" stop-opacity="0.35"/>
+<stop offset="0.913462" stop-color="#E6005C" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="paint1_radial_279_765" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(640.5 457.685) rotate(-2.33152) scale(287.238 281.241)">
+<stop stop-color="#0077FF" stop-opacity="0.35"/>
+<stop offset="0.266773" stop-color="#0077FF" stop-opacity="0.35"/>
+<stop offset="0.913462" stop-color="#0077FF" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="paint2_radial_279_765" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(325 566) rotate(-72.9833) scale(146.933 164.757)">
+<stop stop-color="#0077FF" stop-opacity="0.25"/>
+<stop offset="0.266773" stop-color="#0077FF" stop-opacity="0.25"/>
+<stop offset="0.913462" stop-color="#0077FF" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="paint3_radial_279_765" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(197.5 386.5) rotate(-15.8106) scale(321.15 301.478)">
+<stop stop-color="#0077FF" stop-opacity="0.35"/>
+<stop offset="0.269603" stop-color="#0077FF" stop-opacity="0.35"/>
+<stop offset="0.913462" stop-color="#0077FF" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="paint4_radial_279_765" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(86 593.366) rotate(-50.9114) scale(314.026 379.988)">
+<stop stop-color="#E6005C" stop-opacity="0.55"/>
+<stop offset="0.160401" stop-color="#E6005C" stop-opacity="0.547368"/>
+<stop offset="0.913462" stop-color="#E6005C" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="paint5_radial_279_765" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1164.5 246) rotate(152.069) scale(356.531 319.808)">
+<stop stop-color="#E6005C" stop-opacity="0.55"/>
+<stop offset="0.160401" stop-color="#E6005C" stop-opacity="0.547368"/>
+<stop offset="0.913462" stop-color="#E6005C" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="paint6_radial_279_765" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(354.5 544.348) rotate(-28.5008) scale(274.234 271.615)">
+<stop stop-color="#0077FF" stop-opacity="0.35"/>
+<stop offset="0.160401" stop-color="#0077FF" stop-opacity="0.35"/>
+<stop offset="0.913462" stop-color="#0077FF" stop-opacity="0"/>
+</radialGradient>
+</defs>
+</svg>
