@@ -15,7 +15,10 @@ const themes = {
       background: 'assets/three-section/background_light.svg',
       shape_one: 'assets/three-section/one-shape-light.png',
       shape_two: 'assets/three-section/two-shape-light.png',
-      shape_three: 'assets/three-section/three-shape-light.png'
+      shape_three: 'assets/three-section/three-shape-light.png',
+      shape_four: 'assets/four-page/one_light.png',
+      shape_five: 'assets/four-page/two_light.png',
+      shape_six: 'assets/four-page/three_light.png'
     }
   },
   dark: {
@@ -34,7 +37,10 @@ const themes = {
       background: 'assets/three-section/background_dark.svg',
       shape_one: 'assets/three-section/one-shape-dark.png',
       shape_two: 'assets/three-section/two-shape-dark.png',
-      shape_three: 'assets/three-section/three-shape-dark.png'
+      shape_three: 'assets/three-section/three-shape-dark.png',
+      shape_four: 'assets/four-page/one_dark.png',
+      shape_five: 'assets/four-page/two_dark.png',
+      shape_six: 'assets/four-page/three_dark.png'
     }
   }
 };

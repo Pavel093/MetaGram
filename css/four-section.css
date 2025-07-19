@@ -1,0 +1,9 @@
+.four-section{
+    min-height: 100vh;
+}
+
+.four-section h2{
+    margin-top: 5%;
+    font-size: 52px;
+    text-align: center;
+}

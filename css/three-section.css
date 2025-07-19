@@ -8,6 +8,21 @@
     display: flex;
 }
 
+.three-section::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 100px;
+    pointer-events: none;
+    top: 0;
+    background: linear-gradient(to bottom, black 0%, transparent 100%);
+}
+
+[data-theme="light"] .three-section::after{
+    background: linear-gradient(to bottom, white 0%, transparent 100%);
+}
+
 .three-section .svg {
     position: absolute;
     left: 0;
@@ -19,12 +34,10 @@
 
 .three-section video {
     position: absolute;
-    bottom: 15%;
-    left: 35px;
+    bottom: 2.5%;
+    left: 15px;
     z-index: -1;
-    width: 60%;
-    
-    /* Маска с радиальным градиентом (уход в чёрный со всех сторон) */
+    width: 50%;
     -webkit-mask-image: radial-gradient(
         ellipse at center,
         black 30%,
@@ -37,7 +50,15 @@
     );
 }
 
-/* Светлая тема — уход в белый */
+.three-section h3{
+    position: absolute;
+    bottom: calc(10% + 374px);
+    left: 35px;
+    padding-bottom: 25px;
+    font-size: 34px;
+    z-index: 1;
+}
+
 @media (prefers-color-scheme: light) {
     .three-section video {
         -webkit-mask-image: radial-gradient(
@@ -94,7 +115,7 @@
 }
 
 .three-section .left-card .two{
-    top: 1%;
+    top: 2.7%;
     left: 0px;
     width: 100px;
 }
@@ -127,6 +148,7 @@
 .three-section .right-card{
     width: 40%;
     position: relative;
+    margin-top: 5%;
 }
 
 .three-section .right-card .element{
@@ -176,3 +198,120 @@
     transform-origin: left;
     z-index: 0;
 }   
+
+@media (max-width: 768px) {
+    .three-section {
+        padding: 15px;
+        display: block;
+        padding-top: 20%;
+    }
+    
+    .three-section.three-section .svg{
+        top: 0;
+        scale: 1.4;
+    }
+
+    .three-section video {
+        position: relative;
+        bottom: auto;
+        left: 0;
+        margin-top: 20px;
+        z-index: 0;
+        width: 100%;
+    }
+    
+    .three-section h3 {
+        position: relative;
+        bottom: auto;
+        left: 20px;
+        padding: 20px 0;
+        font-size: 32px;
+        margin-top: 20px;
+        width: 50%;
+    }
+    
+    .three-section .left-card {
+        width: 100% !important;
+        margin-bottom: 30px;
+    }
+    
+    .three-section .left-card .mini-card {
+        width: 92%;
+        padding: 20px;
+        margin: 0 auto;
+        margin-top: 15%;
+        margin-bottom: 35%;
+    }
+    
+    .three-section .left-card .one {
+        top: 85%;
+        left: -15px;
+        width: 40px;
+    }
+    
+    .three-section .left-card .two {
+        top: -45px;
+        left: 0px;
+        width: 80px;
+    }
+    
+    .three-section .left-card .three {
+        top: 20%;
+        left: auto;
+        width: 170px;
+        right: -20px;
+    }
+    
+    .three-section h2 {
+        font-size: 32px;
+        margin-bottom: 15px;
+    }
+    
+    .left-card .mini-card p {
+        font-size: 16px;
+    }
+    
+    .three-section .right-card {
+        width: 100%;
+        margin-top: 0;
+    }
+    
+    .three-section .right-card .element {
+        width: 80%;
+        margin: 0 auto;
+        margin-bottom: 30px;
+        align-items: center;
+    }
+    
+    .three-section .right-card .element .date {
+        font-size: 16px;
+        padding-right: 15px;
+        min-width: 50px;
+    }
+    
+    .three-section .right-card .element .info {
+        font-size: 16px;
+        padding-left: 15px;
+        width: 50%;
+    }
+    
+    .three-section .right-card .element img {
+        width: 25px;
+        height: 25px;
+    }
+    
+    /* Градиенты для мобильных */
+    @media (prefers-color-scheme: light) {
+        .three-section .svg {
+            mask-image: linear-gradient(to top, transparent, white 50px);
+            -webkit-mask-image: linear-gradient(to top, transparent, white 50px);
+        }
+    }
+    
+    @media (prefers-color-scheme: dark) {
+        .three-section .svg {
+            mask-image: linear-gradient(to top, transparent, black 50px);
+            -webkit-mask-image: linear-gradient(to top, transparent, black 50px);
+        }
+    }
+}

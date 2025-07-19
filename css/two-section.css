@@ -5,6 +5,21 @@
     height: 100vh;
 }
 
+.two-section::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 100px;
+    pointer-events: none;
+    bottom: 0;
+    background: linear-gradient(to top, black 0%, transparent 100%);
+}
+
+[data-theme="light"] .two-section::after{
+    background: linear-gradient(to top, white 0%, transparent 100%);
+}
+
 .card-container-second-page.two-section .background{
     position: absolute;
     top: 50%;
@@ -36,6 +51,8 @@
 .card-container-second-page .card.base-material {
     box-sizing: border-box;
     padding: 35px;
+    position: relative;
+    z-index: 1;
 }
 
 .two-section ul, ol {
@@ -102,6 +119,20 @@
 }
 
 @media (min-width: 768px) {
+    .card-container-second-page .card {
+        transition: filter 0.3s ease;
+    }
+
+    .card-container-second-page:hover .card:not(:hover) {
+        filter: blur(5px);
+    }
+
+    .card-container-second-page .card:hover {
+        filter: blur(0);
+        transform: scale(1.02); /* Опциональный эффект выделения */
+        z-index: 2; /* Поднимаем над другими карточками */
+        transition: filter 0.3s ease, transform 0.3s ease;
+    }
     .two-section {
         display: flex;
         flex-direction: column;
@@ -256,3 +287,4 @@
         font-size: 16px;
     }
 }
+
