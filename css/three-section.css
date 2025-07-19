@@ -8,7 +8,7 @@
     display: flex;
 }
 
-.three-section .svg{
+.three-section .svg {
     position: absolute;
     left: 0;
     top: 0;
@@ -16,6 +16,58 @@
     height: auto;
     z-index: -1;
 }
+
+.three-section video {
+    position: absolute;
+    bottom: 15%;
+    left: 35px;
+    z-index: -1;
+    width: 60%;
+    
+    /* Маска с радиальным градиентом (уход в чёрный со всех сторон) */
+    -webkit-mask-image: radial-gradient(
+        ellipse at center,
+        black 30%,
+        transparent 70%
+    );
+    mask-image: radial-gradient(
+        ellipse at center,
+        black 30%,
+        transparent 70%
+    );
+}
+
+/* Светлая тема — уход в белый */
+@media (prefers-color-scheme: light) {
+    .three-section video {
+        -webkit-mask-image: radial-gradient(
+            ellipse at center,
+            white 30%,
+            transparent 70%
+        );
+        mask-image: radial-gradient(
+            ellipse at center,
+            white 30%,
+            transparent 70%
+        );
+    }
+}
+
+
+@media (prefers-color-scheme: light) {
+    .three-section .svg {
+        mask-image: linear-gradient(to top, transparent, white 100px);
+        -webkit-mask-image: linear-gradient(to top, transparent, white 100px);
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .three-section .svg {
+        mask-image: linear-gradient(to top, transparent, black 100px);
+        -webkit-mask-image: linear-gradient(to top, transparent, black 100px);
+    }
+}
+
 
 .three-section .left-card{
     position: relative;
@@ -26,6 +78,32 @@
     width: max-content;
     padding: 40px;
     margin: 10px;
+    margin-top: 10%;
+    z-index: 1;
+    position: relative;
+}
+
+.three-section .left-card img{
+    position: absolute;
+}
+
+.three-section .left-card .one{
+    top: 22%;
+    left: -35px;
+    width: 90px;
+}
+
+.three-section .left-card .two{
+    top: 1%;
+    left: 0px;
+    width: 100px;
+}
+
+.three-section .left-card .three{
+    top: 10%;
+    left: 30%;
+    width: 350px;
+    height: auto;
 }
 
 .three-section h2{
@@ -48,6 +126,7 @@
 
 .three-section .right-card{
     width: 40%;
+    position: relative;
 }
 
 .three-section .right-card .element{
@@ -82,4 +161,18 @@
 .three-section .right-card .element img{
     width: 35px;
     height: 35px;
+    z-index: 1;
+    transition: scale 0.3s;
 }
+
+.three-section .right-card .element img:hover{
+    scale: 1.1;
+}
+
+.three-section .right-card .line {
+    position: absolute;
+    background: white;
+    height: 3.3px;
+    transform-origin: left;
+    z-index: 0;
+}   
