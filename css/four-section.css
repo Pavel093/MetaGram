@@ -1,9 +1,147 @@
 .four-section{
-    min-height: 100vh;
+    min-height: 90vh;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
 
 .four-section h2{
     margin-top: 5%;
     font-size: 52px;
     text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.four-section .image-one{
+    bottom: 5%;
+    right: 5%;
+    width: 35%;
+    position: absolute;
+}
+
+.four-section .image-two{
+    top: 25%;
+    left: 45%;
+    width: 18%;
+    position: absolute;
+}
+
+.four-section .image-three{
+    bottom: 0.5%;
+    left: 5%;
+    width: 25%;
+    position: absolute;
+}
+
+.four-section .svg-container{
+    text-align: center;
+    padding-bottom: 0%;
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 768px) {
+    h2{
+        font-size: 37px !important;
+        margin: 20% 0;
+    }
+    .svg-container{
+        display: none;
+    }
+
+    .four-section{
+        overflow: hidden;
+        padding-bottom: 20%;
+    }
+
+    .four-section .image-one{
+        top: auto;
+        bottom: -25px;
+        right: -10%;
+        width: 75%;
+        position: absolute;
+    }
+
+    .four-section .image-two{
+        top: 35px;
+        left: -25px;
+        width: 65%;
+        right: auto;
+        position: absolute;
+    }
+
+    .four-section .image-three{
+        bottom: 35px;
+        left: -10px;
+        width: 40%;
+        position: absolute;
+    }
+    .four-section .card-container{
+        display: flex;
+        width: 85%;
+        padding: 25px;
+        box-sizing: border-box;
+        position: relative;
+        z-index: 1;
+    }
+    .four-section .left{
+        width: 50%;
+    }
+    .four-section .right{
+        width: 50%;
+    }
+    .four-section .left .card{
+        border: 2px solid #FFD700;
+        width: max-content;
+        border-radius: 25px;
+        padding: 10px;
+        margin-bottom: 17px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+    }
+    [data-theme="light"] .four-section .left .card{
+        border: 2px solid #D4095A;
+    }
+    .four-section .right .card{
+        margin-bottom: 17px;
+        height: 59px;
+        padding: 0px;
+    }
+    .four-section .left .card p{
+        font-size: 23px;
+    }
+    .four-section .card-container .left .one{
+        width: 70%;
+    }
+    .four-section .card-container .left .two{
+        width:40%;
+    }
+    .four-section .card-container .left .three{
+        width: 35%;
+    }
+    .four-section .card-container .left .four{
+        width: 40%;
+    }
+    .four-section .card-container .left .five{
+        width: 30%;
+    }
+    .four-section .card-container .left .six{
+        width: 32.5%;
+    }
+    .four-section .card-container .left .seven{
+        width: 27%;
+    }
+    .four-section .card-container .left .eight{
+        width: 25%;
+    }
+}
+
+@media (min-width: 768px) {
+    .four-section .card-container{
+        display: none;
+    }
 }

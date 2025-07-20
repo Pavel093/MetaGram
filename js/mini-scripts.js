@@ -70,3 +70,61 @@ observer.observe(document.documentElement, {
   attributes: true,  // Следим за изменениями атрибутов
   attributeFilter: ['data-theme']  // Только атрибут data-theme
 });
+
+//TOGGLE
+
+document.addEventListener('DOMContentLoaded', function() {
+    const toggle = document.getElementById('theme-toggle');
+    
+    // Функция для обновления состояния переключателя
+    function updateToggleState() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        toggle.checked = (currentTheme === 'dark');
+    }
+    
+    // Установка начального состояния переключателя
+    updateToggleState();
+    
+    // Обработка изменения темы через переключатель
+    toggle.addEventListener('change', function() {
+        const themeName = this.checked ? 'dark' : 'light';
+        setTheme(themeName);
+    });
+    
+    // Синхронизация с системными изменениями темы
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        if (!localStorage.getItem('selectedTheme')) {
+            const themeName = e.matches ? 'dark' : 'light';
+            setTheme(themeName);
+            updateToggleState();
+        }
+    });
+    
+    // Наблюдатель за изменениями атрибута data-theme
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.attributeName === 'data-theme') {
+                updateToggleState();
+            }
+        });
+    });
+    
+    // Начинаем наблюдение за изменениями атрибута data-theme
+    observer.observe(document.documentElement, {
+        attributes: true
+    });
+});
+
+// Функция для обновления переключателя (если нужно из других частей кода)
+function updateToggleState() {
+    const toggle = document.getElementById('theme-toggle');
+    if (toggle) {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        toggle.checked = (currentTheme === 'dark');
+    }
+}
+
+// Добавляем функцию обновления в ваш themeSwitcher
+if (window.themeSwitcher) {
+    window.themeSwitcher.updateToggleState = updateToggleState;
+}

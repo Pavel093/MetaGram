@@ -6,7 +6,7 @@ const themes = {
         desktop: 'assets/video/white_coin.mp4',
         mobile: 'assets/video/white_coin_720.mp4',
       },
-      promo_secondary: {  // Добавлено новое видео с префиксом 1
+      promo_secondary: {
         desktop: 'assets/video/1white_coin.mp4',
         mobile: 'assets/video/1white_coin_720.mp4',
       },
@@ -18,7 +18,8 @@ const themes = {
       shape_three: 'assets/three-section/three-shape-light.png',
       shape_four: 'assets/four-page/one_light.png',
       shape_five: 'assets/four-page/two_light.png',
-      shape_six: 'assets/four-page/three_light.png'
+      shape_six: 'assets/four-page/three_light.png',
+      svg: 'assets/four-page/svg_light.svg'
     }
   },
   dark: {
@@ -28,7 +29,7 @@ const themes = {
         desktop: 'assets/video/dark_coin.mp4',
         mobile: 'assets/video/dark_coin_720.mp4'
       },
-      promo_secondary: {  // Добавлено новое видео с префиксом 1
+      promo_secondary: {
         desktop: 'assets/video/1dark_coin.mp4',
         mobile: 'assets/video/1dark_coin_720.mp4'
       },
@@ -40,7 +41,8 @@ const themes = {
       shape_three: 'assets/three-section/three-shape-dark.png',
       shape_four: 'assets/four-page/one_dark.png',
       shape_five: 'assets/four-page/two_dark.png',
-      shape_six: 'assets/four-page/three_dark.png'
+      shape_six: 'assets/four-page/three_dark.png',
+      svg: 'assets/four-page/svg_dark.svg'
     }
   }
 };
@@ -65,9 +67,28 @@ function initTheme() {
   return themeName;
 }
 
+// Функция для загрузки SVG и вставки его в DOM
+async function loadSvg(url, container) {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    const svgText = await response.text();
+    container.innerHTML = svgText;
+    
+    // Добавляем класс к SVG для последующей стилизации
+    const svgElement = container.querySelector('svg');
+    if (svgElement) {
+      svgElement.classList.add('inline-svg');
+    }
+  } catch (error) {
+    console.error('Error loading SVG:', error);
+    // Можно добавить fallback, например, изображение
+    container.innerHTML = `<img src="${url}" alt="SVG fallback">`;
+  }
+}
+
 // Функция для отложенной загрузки видео
 function loadSecondaryVideo(videoElement, mediaUrl) {
-  // Устанавливаем низкий приоритет загрузки
   const link = document.createElement('link');
   link.rel = 'preload';
   link.as = 'video';
@@ -75,7 +96,6 @@ function loadSecondaryVideo(videoElement, mediaUrl) {
   link.setAttribute('importance', 'low');
   document.head.appendChild(link);
 
-  // Загружаем видео после небольшой задержки
   setTimeout(() => {
     videoElement.innerHTML = `<source src="${mediaUrl}" type="video/mp4">`;
     videoElement.load();
@@ -84,32 +104,30 @@ function loadSecondaryVideo(videoElement, mediaUrl) {
         console.warn('Autoplay failed:', err);
       });
     };
-  }, 1000); // Задержка 1 секунда
+  }, 1000);
 }
 
 // Загрузка медиа с поддержкой мобильных версий
-function loadThemeMedia(themeName) {
+async function loadThemeMedia(themeName) {
   const theme = themes[themeName];
   if (!theme) return;
 
   const mediaElements = document.querySelectorAll('[data-theme-media]');
   const isMobile = isMobileDevice();
 
-  mediaElements.forEach(el => {
+  for (const el of mediaElements) {
     const mediaKey = el.getAttribute('data-theme-media');
     let mediaUrl = theme.media[mediaKey];
 
-    // Если это видео — выбираем мобильную или десктоп версию
     if (mediaUrl && typeof mediaUrl === 'object') {
       mediaUrl = isMobile ? mediaUrl.mobile : mediaUrl.desktop;
     }
 
-    if (!mediaUrl) return;
+    if (!mediaUrl) continue;
 
     if (el.tagName === 'IMG') {
       el.src = mediaUrl;
     } else if (el.tagName === 'VIDEO') {
-      // Для основного видео загружаем сразу
       if (mediaKey === 'promo') {
         el.innerHTML = `<source src="${mediaUrl}" type="video/mp4">`;
         el.load();
@@ -118,13 +136,14 @@ function loadThemeMedia(themeName) {
             console.warn('Autoplay failed:', err);
           });
         };
-      } 
-      // Для дополнительного видео используем отложенную загрузку
-      else if (mediaKey === 'promo_secondary') {
+      } else if (mediaKey === 'promo_secondary') {
         loadSecondaryVideo(el, mediaUrl);
       }
+    } else if (el.classList.contains('svg-container') || mediaKey === 'svg') {
+      // Загружаем SVG как встроенный элемент
+      await loadSvg(mediaUrl, el);
     }
-  });
+  }
 }
 
 // Смена темы
@@ -143,3 +162,9 @@ document.addEventListener('DOMContentLoaded', () => {
   loadThemeMedia(themeName);
   document.querySelector('.theme-loader')?.remove();
 });
+
+// Экспорт функций для доступа из консоли (опционально)
+window.themeSwitcher = {
+  setTheme,
+  getCurrentTheme: () => document.documentElement.getAttribute('data-theme')
+};
