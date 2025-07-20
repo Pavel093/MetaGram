@@ -277,7 +277,7 @@
 
     .card-container-first-page .card-one,
     .card-container-first-page .card-two {
-        width: calc(100% - 40px) !important;
+        width: calc(100% - 0px) !important;
         padding: 20px !important; 
     }
 
