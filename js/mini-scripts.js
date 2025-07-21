@@ -128,3 +128,135 @@ function updateToggleState() {
 if (window.themeSwitcher) {
     window.themeSwitcher.updateToggleState = updateToggleState;
 }
+
+// carusel
+document.addEventListener('DOMContentLoaded', function() {
+    const cardContainer = document.querySelector('.six-section .card-container');
+    const cards = Array.from(document.querySelectorAll('.six-section .card'));
+    
+    // Очищаем контейнер
+    cardContainer.innerHTML = '';
+    
+    // Определяем количество дубликатов для бесшовной анимации
+    const duplicates = 3; // Создаем 3 копии для плавности
+    
+    // Создаем ряды
+    function createInfiniteSlider() {
+        const isMobile = window.innerWidth <= 768;
+        const rows = isMobile ? 3 : 2;
+        
+        // Создаем контейнеры для каждого ряда
+        for (let i = 0; i < rows; i++) {
+            const rowContainer = document.createElement('div');
+            rowContainer.className = `slider-row row-${i}`;
+            
+            // Добавляем карточки (оригиналы + дубликаты)
+            for (let d = 0; d < duplicates; d++) {
+                cards.forEach(card => {
+                    const clone = card.cloneNode(true);
+                    rowContainer.appendChild(clone);
+                });
+            }
+            
+            cardContainer.appendChild(rowContainer);
+        }
+        
+        // Настраиваем анимацию
+        setupAnimation(rows);
+    }
+    
+    function setupAnimation(rows) {
+        const rowContainers = document.querySelectorAll('.slider-row');
+        const duration = 40; // секунд на полный цикл
+        
+        // Стили для основного контейнера
+        cardContainer.style.display = 'flex';
+        cardContainer.style.flexDirection = 'column';
+        cardContainer.style.gap = '20px';
+        cardContainer.style.overflow = 'hidden';
+        cardContainer.style.width = '100%';
+        
+        // Стили для каждого ряда
+        rowContainers.forEach((row, index) => {
+            row.style.display = 'flex';
+            row.style.gap = '20px';
+            row.style.width = 'max-content';
+            row.style.animation = `scroll${index} ${duration}s linear infinite`;
+            
+            // Разное направление для четных рядов
+            if (index % 2 === 0) {
+                row.style.animationDirection = 'reverse';
+            }
+        });
+        
+        // Создаем keyframes для каждого ряда
+        const style = document.createElement('style');
+        let keyframes = '';
+        
+        for (let i = 0; i < rows; i++) {
+            keyframes += `
+                @keyframes scroll${i} {
+                    0% {
+                        transform: translateX(0);
+                    }
+                    100% {
+                        transform: translateX(calc(-50%));
+                    }
+                }
+            `;
+        }
+        
+        style.innerHTML = keyframes;
+        document.head.appendChild(style);
+    }
+    
+    // Инициализация и обработчик изменения размера окна
+    createInfiniteSlider();
+    
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            cardContainer.innerHTML = '';
+            createInfiniteSlider();
+        }, 100);
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  const btnUp = document.querySelector('.btn-up');
+  const footer = document.querySelector('footer');
+  
+  if (!btnUp || !footer) return; // Проверяем, существуют ли элементы
+  
+  // Изначально скрываем кнопку
+  btnUp.style.display = 'none';
+  
+  // Функция для проверки видимости футера
+  function checkFooterVisibility() {
+    const footerRect = footer.getBoundingClientRect();
+    const isFooterVisible = footerRect.top <= window.innerHeight;
+    
+    if (isFooterVisible) {
+      btnUp.style.display = 'block';
+    } else {
+      btnUp.style.display = 'none';
+    }
+  }
+  
+  // Обработчик клика по кнопке
+  btnUp.addEventListener('click', function(e) {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+    btnUp.style.display = 'none'; // Скрываем кнопку после клика
+  });
+  
+  // Проверяем видимость футера при скролле
+  window.addEventListener('scroll', checkFooterVisibility);
+  
+  // Также проверяем при загрузке страницы (на случай, если футер сразу виден)
+  checkFooterVisibility();
+});

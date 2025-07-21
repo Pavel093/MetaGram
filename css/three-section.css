@@ -237,7 +237,7 @@
     
     .three-section .left-card .mini-card {
         width: 92%;
-        padding: 20px;
+        padding: 25px;
         margin: 0 auto;
         margin-top: 15%;
         margin-bottom: 35%;
@@ -256,7 +256,7 @@
     }
     
     .three-section .left-card .three {
-        top: 20%;
+        top: 27%;
         left: auto;
         width: 170px;
         right: -20px;
@@ -264,7 +264,8 @@
     
     .three-section h2 {
         font-size: 32px;
-        margin-bottom: 15px;
+        margin-bottom: 30px;
+        margin-top: 0;
     }
     
     .left-card .mini-card p {

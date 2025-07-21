@@ -13,6 +13,7 @@
     text-align: center;
     position: relative;
     z-index: 1;
+    width: 100%;
 }
 
 .four-section .image-one{
@@ -41,6 +42,11 @@
     padding-bottom: 0%;
     position: relative;
     z-index: 1;
+}
+
+
+.four-section .svg-container svg{
+    width: 95%;
 }
 
 @media (max-width: 768px) {

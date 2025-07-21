@@ -1,0 +1,127 @@
+footer{
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5%;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+footer .logo{
+    position: absolute;
+    left: 24px;
+    top: 0px;
+}
+
+footer .logo a{
+    display: flex;
+    align-items: center;
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 20px;
+    text-decoration: none;
+    gap: 7px;
+    letter-spacing: 1.1px;
+}
+
+[data-theme="light"] footer .logo a{
+    color: black;
+}
+
+footer .logo a img{
+    width: 35px;
+    height: 35px;
+}
+
+footer .center-container{
+    display: flex;
+    width: max-content;
+    gap: 64px;
+    margin-top: 24px;
+    position: relative;
+    z-index: 1;
+}
+
+footer .center-container .row{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    flex-direction: column; 
+}
+
+footer .center-container .row a{
+    height: max-content;
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+
+[data-theme="light"] footer .center-container .row a{
+    color: black;
+}
+
+footer .footer-image{
+    position: absolute;
+    right: 24px;
+    top: 0px;
+}
+
+footer .buttom{
+    width: 100%;
+    margin-top: 5%;
+    margin-bottom: 14px;
+}
+
+footer .buttom p{
+    text-align: center;
+    color: black;
+}
+
+[data-theme="dark"] footer .buttom p{
+    color: #F2F2F2;
+}
+
+footer .footer-image-background{
+    position: absolute;
+    left: 0;
+    bottom: -10%;
+    width: 100%;
+    mask-image: linear-gradient(to top, rgb(255, 255, 255), rgba(255, 255, 255, 0));
+    z-index: -1;
+}
+
+[data-theme="light"] .footer-image-background{
+    mask-image: linear-gradient(to top, rgb(0, 0, 0), rgba(0, 0, 0, 0));
+}
+
+@media (max-width: 768px) {
+    footer{
+        padding-top: 42px;
+    }
+    footer .logo{
+        top: 42px;
+    }
+    footer .center-container{
+        flex-wrap: wrap;
+        width: calc(100% - 48px);
+        position: relative;
+        z-index: 1;
+        padding-top: 48px;
+    }
+    footer .footer-image-background{
+        scale: 4;
+        bottom: 15%;
+        left: -30%;
+    }
+    footer .footer-image{
+        top: auto;
+        bottom: 72px;
+        width: 45%;
+    }
+    footer .buttom{
+        width: 100%;
+        padding-top: 30%;
+        padding-bottom: 14px;
+    }
+}

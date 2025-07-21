@@ -19,7 +19,14 @@ const themes = {
       shape_four: 'assets/four-page/one_light.png',
       shape_five: 'assets/four-page/two_light.png',
       shape_six: 'assets/four-page/three_light.png',
-      svg: 'assets/four-page/svg_light.svg'
+      svg: 'assets/four-page/svg_light.svg',
+      seven_section_background: {
+        desktop: 'assets/seven-section/background.png',
+        mobile: 'assets/seven-section/background_mobile.png'
+      },
+      seven_section_background_svg: 'assets/seven-page/background_light.svg',
+      footer_image: 'assets/footer/shape_light.png',
+      footer_image_background: 'assets/footer/background_light.svg'
     }
   },
   dark: {
@@ -42,7 +49,14 @@ const themes = {
       shape_four: 'assets/four-page/one_dark.png',
       shape_five: 'assets/four-page/two_dark.png',
       shape_six: 'assets/four-page/three_dark.png',
-      svg: 'assets/four-page/svg_dark.svg'
+      svg: 'assets/four-page/svg_dark.svg',
+      seven_section_background: {
+        desktop: 'assets/seven-section/background_dark.png',
+        mobile: 'assets/seven-section/background_dark_mobile.png'
+      },
+      seven_section_background_svg: 'assets/seven-page/background_dark.svg',
+      footer_image: 'assets/footer/shape_dark.png',
+      footer_image_background: 'assets/footer/background_dark.svg'
     }
   }
 };

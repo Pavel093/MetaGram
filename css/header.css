@@ -268,13 +268,13 @@ header .burger-button-pc{
     position: relative;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
     .burger-button-pc {
         display: none;
     }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
     header .burger-mobile{
         display: none;
     }

@@ -81,3 +81,22 @@ body {
 [data-theme="dark"] .base-color-multi{
   color: #FFD700;
 }
+
+.btn-up{
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9;
+  width: 55px;
+  height: 55px;
+  fill: #FFD700;
+  border-radius: 10px;
+    backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background-color: rgba(0, 0, 0, 0.26);
+}
+
+[data-theme="light"] .btn-up{
+  fill: #D4095A;
+  background-color: rgba(255, 255, 255, 0.26);
+}

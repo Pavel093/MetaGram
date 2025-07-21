@@ -1,0 +1,104 @@
+.six-section h2 {
+    font-size: 43px;
+    text-align: center;
+    margin-top: 10%;
+    width: 100%;
+}   
+
+.six-section {
+    position: relative;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.six-section::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px; 
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0),
+        rgb(255, 255, 255)
+    );
+    pointer-events: none;
+}
+
+[data-theme="dark"] .six-section::after{
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0),
+        rgb(0, 0, 0)
+    );
+}
+
+.six-section .background {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    mask-image: linear-gradient(to top, rgb(0, 0, 0), rgba(0, 0, 0, 0));
+    filter: brightness(1.1) contrast(0.9) saturate(0.95);
+    mix-blend-mode: screen;
+    opacity: 0.9;
+}
+
+@media (prefers-color-scheme: dark) {
+    .six-section .background {
+        mask-image: linear-gradient(to top, rgb(255, 255, 255), rgba(255, 255, 255, 0));
+        filter: none;
+        mix-blend-mode: normal;
+        opacity: 1;
+    }
+}
+
+.six-section .card-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.six-section .card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    padding: 25px;
+    box-sizing: border-box;
+    border-radius: 100px;
+    flex-shrink: 0;
+}
+
+.six-section .card img{
+    width: 60px;
+}
+
+.six-section .card p{
+    font-size: 26px;
+}
+
+.slider-row {
+    display: flex;
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .six-section .card-container {
+        gap: 15px;
+    }
+    .six-section{
+        overflow: hidden;
+    }
+    .six-section .card-container{
+        margin-bottom: 35%;
+    }
+    .six-section .background {
+        scale: 4;
+    }
+}

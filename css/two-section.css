@@ -120,18 +120,18 @@
 
 @media (min-width: 768px) {
     .card-container-second-page .card {
-        transition: filter 0.3s ease;
+        transition: filter 0.3s ease, transform 0.3s ease;
     }
-
-    .card-container-second-page:hover .card:not(:hover) {
+    
+    .card-container-second-page .card:hover ~ .card,
+    .card-container-second-page .card:has(~ .card:hover) {
         filter: blur(5px);
     }
 
     .card-container-second-page .card:hover {
         filter: blur(0);
-        transform: scale(1.02); /* Опциональный эффект выделения */
-        z-index: 2; /* Поднимаем над другими карточками */
-        transition: filter 0.3s ease, transform 0.3s ease;
+        transform: scale(1.02);
+        z-index: 2;
     }
     .two-section {
         display: flex;
@@ -287,4 +287,5 @@
         font-size: 16px;
     }
 }
+
 
